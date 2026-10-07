@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Robi, tu coach de salud</title>
+<link rel="icon" href="../img/Logo- Diseño Web.png">
+<!-- Bootstrap 5 (CSS: grilla y utilidades) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap-grid.min.css" rel="stylesheet" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap-utilities.min.css" rel="stylesheet" crossorigin="anonymous">
+<link rel="stylesheet" href="../css/navbar.css">
+<link rel="stylesheet" href="../css/robi.css">
+</head>
+<body id="pagina-robi" data-pagina="robi">
+  <!-- ============ BARRA DE NAVEGACIÓN ============ -->
+  <header class="hf-nav" id="hfNav">
+    <a href="../index.html" class="hf-nav__brand" id="nav-logo">
+      <img src="../img/Logo- Diseño Web.png" alt="Logo HealthyFit" class="hf-nav__logo" id="logotipo">
+      <span class="hf-nav__name"><span>Healthy</span><span>Fit</span></span>
+    </a>
+    <!-- Robi (solo celular): imagen sin fondo junto a la hamburguesa -->
+    <a href="robi.html" class="hf-nav__robi hf-nav__robi--top" id="nav-robi-top" data-pagina="robi" data-tip="Habla con Robi" aria-label="Habla con Robi, asistente de ejercicio y alimentación"><img src="../img/mascota icono.png" alt="Robi, asistente de ejercicio y alimentación"></a>
+    <button class="hf-nav__toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navPanel"><span></span><span></span><span></span></button>
+    <div class="hf-nav__backdrop" id="navBackdrop"></div>
+    <nav class="hf-nav__panel" id="navPanel" aria-label="Principal">
+      <button class="hf-nav__close" id="navClose" aria-label="Cerrar menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+      </button>
+      <!-- El botón activo lo marca js/navbar.js con data-pagina; no uses class="is-active" a mano -->
+      <ul class="hf-nav__links">
+        <li><a href="../index.html" id="nav-inicio" data-pagina="inicio">Inicio</a></li>
+        <li><a href="servicios.html" id="nav-servicios" data-pagina="servicios">Servicios</a></li>
+        <li><a href="productos.html" id="nav-productos" data-pagina="productos">Productos</a></li>
+        <li><a href="nosotros.html" id="nav-nosotros" data-pagina="nosotros">Sobre de Nosotros</a></li>
+        <li><a href="blog.html" id="nav-blog" data-pagina="blog">Blog</a></li>
+        <li><a href="contacto.html" id="nav-contacto" data-pagina="contacto">Contacto</a></li>
+        <!-- Robi: imagen SIN fondo que funciona como botón hacia el asistente (paginas/robi.html) -->
+        <li class="hf-nav__robi-li"><a href="robi.html" class="hf-nav__robi" id="nav-robi" data-pagina="robi" data-tip="Habla con Robi" aria-label="Habla con Robi, asistente de ejercicio y alimentación"><img src="../img/mascota icono.png" alt="Robi, asistente de ejercicio y alimentación"></a></li>
+      </ul>
+      <div class="hf-nav__tools">
+        <form class="hf-search" role="search" action="productos.html" method="get">
+          <input type="search" name="q" id="navSearch" placeholder="Buscador" aria-label="Buscar productos">
+          <button type="submit" aria-label="Buscar"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><circle cx="10" cy="10" r="6"/><path d="M15 15l6 6"/></svg></button>
+        </form>
+        <div class="hf-icons">
+          <a href="../index.html#login" class="hf-icon" id="nav-cuenta" aria-label="Mi cuenta (Login)"><svg viewBox="0 0 32 32" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="16" cy="11" r="6"/><path d="M4 30c0-7 5-11 12-11s12 4 12 11z"/></svg></a>
+          <a href="productos.html" class="hf-icon" id="nav-carrito" aria-label="Carrito de compras"><svg viewBox="0 0 36 32" width="34" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M1 2h5l4 18h19l4-13H8"/><path d="M14 8l2 12M20 8v12M26 8l-2 12M8 14h25"/><circle cx="13" cy="27" r="2.2" fill="currentColor"/><circle cx="27" cy="27" r="2.2" fill="currentColor"/></svg><span class="hf-badge" id="cartCount" hidden>0</span></a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+<div class="wrap">
+  <h1>Robi 💚</h1>
+  <p class="tag">Tu compañero de ejercicio y buena alimentación</p>
+
+  <div class="stage">
+    <div class="robot-shadow"></div>
+    <div class="robot" id="robot">
+      <div class="head">
+        <div class="earL"></div><div class="earR"></div>
+        <div class="face">
+          <div class="eye left"></div>
+          <div class="eye right"></div>
+          <div class="smile"></div>
+        </div>
+      </div>
+      <div class="neck"></div>
+      <div class="body-part">
+        <div class="heart">
+          <svg viewBox="0 0 32 29">
+            <path d="M16 28 C6 20 0 14 0 8 C0 3 4 0 8 0 C12 0 15 3 16 6 L16 28 Z" fill="#8be79a"/>
+            <path d="M16 28 C26 20 32 14 32 8 C32 3 28 0 24 0 C20 0 17 3 16 6 L16 28 Z" fill="#ffb35c"/>
+          </svg>
+        </div>
+        <div class="belt"></div>
+        <div class="arms">
+          <div class="armL"><div class="stripe"></div><div class="joint"></div></div>
+          <div class="armR"><div class="stripe"></div><div class="joint"></div></div>
+        </div>
+      </div>
+      <div class="hips"></div>
+      <div class="legs">
+        <div class="leg"><div class="stripe"></div><div class="foot"></div></div>
+        <div class="leg"><div class="stripe"></div><div class="foot"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat-panel">
+    <div class="chat-log" id="log">
+      <div class="bubble bot">¡Hola! Soy Robi 🤖. Pregúntame sobre ejercicio (cardio, fuerza, estiramientos, motivación) o sobre buena alimentación (proteínas, frutas y verduras, hidratación, azúcar, planificar comidas).</div>
+    </div>
+    <div class="chips">
+      <div class="chip" data-q="¿Cómo empiezo a hacer ejercicio?">Empezar a entrenar</div>
+      <div class="chip" data-q="¿Qué es una alimentación balanceada?">Comer balanceado</div>
+      <div class="chip" data-q="No tengo motivación">Motivación</div>
+      <div class="chip" data-q="¿Cuánta agua debo tomar?">Hidratación</div>
+    </div>
+    <form class="chat-form" id="form">
+      <input id="input" type="text" placeholder="Escribe tu pregunta..." autocomplete="off" />
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+  <p class="hint">Robi da consejos generales, no reemplaza a un profesional de la salud o nutrición.</p>
+</div>
+
+<!-- Bootstrap 5 (JS), barra de navegación y script de Robi -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="../js/navbar.js"></script>
+<script src="../js/robi.js"></script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+/* HEALTHYFIT · robi.css — estilos de la página de Robi (coach de ejercicio y alimentación) */
+  :root{
+    --bg:#f3f6f2;
+    --panel:#ffffff;
+    --ink:#1b3324;
+    --sub:#5c6f63;
+    --green-dark:#123321;
+    --green:#1e6b46;
+    --green-mid:#2f8a5c;
+    --green-glow:#5ee08a;
+    --orange:#ff9f43;
+    --orange-glow:#ffb35c;
+    --line:#dfe8e0;
+    --bubble-user:#e8f3ec;
+    --bubble-bot:#f6efe3;
+    font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0e1712; --panel:#152219; --ink:#eaf3ec; --sub:#9fb3a5;
+      --line:#233527; --bubble-user:#1d3327; --bubble-bot:#2a2318;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0e1712; --panel:#152219; --ink:#eaf3ec; --sub:#9fb3a5;
+    --line:#233527; --bubble-user:#1d3327; --bubble-bot:#2a2318;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    font-family:inherit;
+    margin:0; background:var(--bg); color:var(--ink);
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+    display:flex; flex-direction:column; align-items:center;
+    min-height:100%;
+  }
+  .wrap{ width:100%; max-width:520px; padding:20px 16px 28px; display:flex; flex-direction:column; gap:16px;}
+
+  h1{ font-size:1.3rem; margin:4px 0 0; text-align:center; font-weight:800;}
+  p.tag{ margin:0; text-align:center; color:var(--sub); font-size:.92rem;}
+
+  /* ---------- ROBOT STAGE (2D flat, minimalista) ---------- */
+  .stage{
+    position:relative; height:300px; display:flex; align-items:flex-end; justify-content:center;
+    background: radial-gradient(circle at 50% 28%, rgba(94,224,138,.16), transparent 62%);
+    border-radius:24px;
+  }
+  .robot-shadow{
+    position:absolute; bottom:10px; width:110px; height:14px; border-radius:50%;
+    background:rgba(0,0,0,.14); filter:blur(4px);
+    animation: shadowPulse 3.2s ease-in-out infinite;
+  }
+  .robot{
+    position:relative; width:170px; animation: floaty 3.2s ease-in-out infinite;
+    transform-origin:bottom center;
+  }
+  .robot.wave .armR{ animation: waveArm 1.2s ease-in-out 2; }
+  .robot.talk .head{ animation: nod 0.5s ease-in-out infinite; }
+
+  /* cabeza: forma tipo casco redondeado, dos tonos como en el diseño original */
+  .head{
+    position:relative; width:150px; height:118px; margin:0 auto;
+    background: linear-gradient(180deg, var(--green-mid) 0%, var(--green) 55%, var(--green) 100%);
+    border-radius:50% 50% 46% 46% / 62% 62% 38% 38%;
+  }
+  .head::before{ /* linea de union de casco, como en el original */
+    content:""; position:absolute; left:14%; right:14%; top:38%; height:2px;
+    background:rgba(0,0,0,.12); border-radius:2px;
+  }
+  .earL,.earR{
+    position:absolute; top:32px; width:28px; height:38px; border-radius:50%;
+    background:var(--green);
+  }
+  .earL{ left:-15px;} .earR{ right:-15px;}
+  .earL::after,.earR::after{
+    content:""; position:absolute; inset:6px; border-radius:50%; border:3px solid var(--orange);
+  }
+  .face{
+    position:absolute; left:9px; right:9px; top:30px; bottom:5px;
+    background:var(--green-dark); border-radius:44% 44% 50% 50% / 55% 55% 45% 45%;
+  }
+  .eye{
+    position:absolute; top:32px; width:25px; height:32px; border-radius:50%;
+  }
+  .eye.left{ left:23px; background:var(--green-glow); box-shadow:0 0 12px 2px var(--green-glow);}
+  .eye.right{ right:23px; background:var(--orange-glow); box-shadow:0 0 12px 2px var(--orange-glow);}
+  .eye{ animation: blink 4.5s ease-in-out infinite; }
+  .smile{
+    position:absolute; left:50%; bottom:18px; width:24px; height:10px; transform:translateX(-50%);
+    border-bottom:3px solid #0a1a10; border-radius:0 0 20px 20px;
+  }
+
+  .neck{ width:26px; height:8px; margin:0 auto; background:var(--green-dark); }
+
+  .body-part{
+    position:relative; width:118px; height:80px; margin:0 auto;
+    background:var(--green); border-radius:22px 22px 30px 30px;
+  }
+  .belt{
+    position:absolute; left:8%; right:8%; bottom:10px; height:8px;
+    background:var(--green-dark); border-radius:6px;
+  }
+  .heart{
+    position:absolute; left:50%; top:16px; width:40px; height:36px; transform:translateX(-50%);
+    animation: heartbeat 1.8s ease-in-out infinite;
+  }
+  .heart svg{ width:100%; height:100%; filter: drop-shadow(0 0 7px var(--green-glow)); }
+
+  .arms{ position:absolute; top:4px; left:0; right:0;}
+  .armL,.armR{
+    position:absolute; top:0; width:21px; height:62px; background:var(--green-mid);
+    border-radius:12px;
+  }
+  .armL{ left:-15px; transform:rotate(16deg); transform-origin:top center;}
+  .armR{ right:-15px; transform-origin:top center;}
+  .stripe{ position:absolute; left:50%; top:8px; bottom:8px; width:3px; background:var(--orange); transform:translateX(-50%); border-radius:2px;}
+  .joint{ position:absolute; left:50%; bottom:-6px; width:14px; height:14px; border-radius:50%; background:var(--green-dark); border:2px solid var(--orange); transform:translateX(-50%);}
+
+  .hips{ width:100px; height:20px; margin:-6px auto 0; background:var(--green-dark); border-radius:0 0 16px 16px;}
+  .legs{ display:flex; justify-content:center; gap:16px; margin-top:0;}
+  .leg{ width:25px; height:54px; background:var(--green-mid); border-radius:0 0 12px 12px; position:relative;}
+  .foot{ width:34px; height:15px; background:var(--green-dark); border-radius:9px; margin:2px auto 0;}
+
+  @keyframes floaty{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-8px);} }
+  @keyframes shadowPulse{ 0%,100%{ transform:scale(1); opacity:.5;} 50%{ transform:scale(.85); opacity:.3;} }
+  @keyframes blink{ 0%,92%,100%{ transform:scaleY(1);} 96%{ transform:scaleY(.1);} }
+  @keyframes heartbeat{ 0%,100%{ transform:translateX(-50%) scale(1);} 50%{ transform:translateX(-50%) scale(1.12);} }
+  @keyframes waveArm{ 0%,100%{ transform:rotate(0deg);} 50%{ transform:rotate(-50deg);} }
+  @keyframes nod{ 0%,100%{ transform:translateY(0) rotate(0);} 50%{ transform:translateY(-2px) rotate(2deg);} }
+  @media (prefers-reduced-motion: reduce){
+    .robot, .robot-shadow, .eye, .heart, .armR, .head{ animation:none !important; }
+  }
+
+  /* ---------- CHAT ---------- */
+  .chat-panel{
+    background:var(--panel); border:1px solid var(--line); border-radius:18px;
+    display:flex; flex-direction:column; overflow:hidden;
+  }
+  .chat-log{
+    padding:14px; display:flex; flex-direction:column; gap:10px;
+    max-height:280px; overflow-y:auto;
+  }
+  .bubble{ max-width:82%; padding:10px 13px; border-radius:14px; line-height:1.35; font-size:.93rem; }
+  .bubble.bot{ background:var(--bubble-bot); align-self:flex-start; border-bottom-left-radius:4px;}
+  .bubble.user{ background:var(--bubble-user); align-self:flex-end; border-bottom-right-radius:4px;}
+  .chat-form{
+    display:flex; gap:8px; padding:10px; border-top:1px solid var(--line);
+  }
+  .chat-form input{
+    flex:1; padding:10px 12px; border-radius:12px; border:1px solid var(--line);
+    background:transparent; color:var(--ink); font-size:.95rem;
+  }
+  .chat-form input:focus{ outline:2px solid var(--green-mid); outline-offset:1px;}
+  .chat-form button{
+    background:var(--green); color:#fff; border:none; border-radius:12px;
+    padding:0 16px; font-weight:700; font-size:.9rem; cursor:pointer;
+  }
+  .chat-form button:active{ transform:scale(.96); }
+  .chips{ display:flex; flex-wrap:wrap; gap:6px; padding:0 14px 4px; }
+  .chip{
+    font-size:.78rem; padding:5px 10px; border-radius:999px; border:1px solid var(--line);
+    background:var(--bubble-bot); cursor:pointer; color:var(--ink);
+  }
+  .hint{ font-size:.78rem; color:var(--sub); text-align:center; padding:0 14px 12px;}
+
+  /* ---------- ENLACE DE REGRESO ---------- */
+  .back-link{
+    align-self:flex-start; display:inline-flex; align-items:center; gap:6px; padding:8px 16px;
+    border-radius:999px; border:1px solid var(--line); background:var(--panel); color:var(--green);
+    font-weight:700; font-size:.9rem; text-decoration:none; transition:transform .25s, background .25s;
+  }
+  .back-link:hover{ transform:translateX(-4px); background:var(--bubble-user); color:var(--green); }
+  .bubble{ animation: bubbleIn .35s ease-out both; }
+  @keyframes bubbleIn{ from{ opacity:0; transform:translateY(8px) scale(.97);} to{ opacity:1; transform:none;} }
+  .chip{ transition:transform .2s, background .2s; }
+  .chip:hover{ transform:translateY(-2px); background:var(--bubble-user); }
+
+  /* ---------- BARRA DE NAVEGACIÓN EN LA PÁGINA DE ROBI ---------- */
+  body > .hf-nav{ align-self:stretch; width:100%; }

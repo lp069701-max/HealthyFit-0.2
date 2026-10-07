@@ -1,0 +1,157 @@
+/* =====================================================================
+   HEALTHYFIT · navbar.css — BARRA DE NAVEGACIÓN (idéntica en todas las páginas, incluida Robi)
+   Contiene: variables de la barra · barra y enlaces · ícono de usuario · BOTÓN DE ROBI.
+   El diseño de la barra es el mismo que tenías en estilo.css; solo se movió aquí
+   para que la página de Robi (que tiene su propio CSS) pueda usarla también.
+   Orden de enlaces: Inicio · Servicios · Productos · Sobre de Nosotros · Blog · Contacto · [Robi]
+   ===================================================================== */
+
+:root{
+  /* paleta mínima que usa la barra (mismos valores que estilo.css) */
+  --font-main:'Inter',system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+  --font-nav:var(--font-main);
+  --green-1:#8cc63f; --green-2:#2f8f2a; --green-dark:#14501a;
+  --orange-1:#ffb347; --orange-2:#ee6c1a;
+  --grad-green:linear-gradient(135deg,var(--green-1),var(--green-2));
+  --grad-orange:linear-gradient(135deg,var(--orange-1),var(--orange-2));
+
+  /* ---- 1.17 BARRA DE NAVEGACIÓN (PC, tablet y celular) ---- */
+  --nav-h:84px;
+  --nav-bg:#001802; --nav-border:#2f8f2a; --nav-divider:rgba(255,255,255,.25);
+  --brand-text:#ffffff; --brand-size:15px; --brand-spacing:3px;
+  --nav-link:#ffffff; --nav-link-hover:#ffb347; --nav-link-hover-bg:rgba(140,198,63,.22); --nav-link-size:14px; --nav-link-weight:600;
+  --nav-active-bg:var(--grad-orange); --nav-active-text:#14501a;
+  --nav-icons:#ffffff; --hamburger-color:#ffffff;
+  --search-bg:#ffffff; --search-border:#8cc63f; --search-text:#46584a;
+  --search-btn-bg:linear-gradient(135deg,#8cc63f,#2f8f2a); --search-btn-icon:#ffffff;
+  --badge-bg:var(--grad-orange); --badge-text:#14501a;
+
+  /* ---- 1.18 ÍCONO DE USUARIO (barra de navegación) ---- */
+  --user-size:46px;
+  --user-bg:radial-gradient(circle at 30% 25%,#9bd64a,#2f8f2a 70%); --user-border:#ee6c1a; --user-icon:#ffffff;
+  --user-ring:rgba(238,108,26,.25);
+  --user-hover-bg:radial-gradient(circle at 30% 25%,#ffb347,#ee6c1a 75%); --user-hover-ring:rgba(140,198,63,.45);
+
+  /* ---- 1.17b BOTÓN DE ROBI (imagen sin fondo, al final de la barra) ---- */
+  --robi-h:54px;                              /* alto de la imagen en PC */
+  --robi-glow:rgba(238,108,26,.65);           /* brillo al pasar el mouse */
+  --robi-tip-bg:var(--grad-orange); --robi-tip-text:#14501a;
+}
+[hidden]{display:none!important}
+
+/* =====================================================
+   17. BARRA DE NAVEGACIÓN
+   PC (+1200px) una fila · Tablet (769–1200px) dos filas · Celular (≤768px) hamburguesa
+   ===================================================== */
+.hf-nav,.hf-nav *,.hf-nav *::before,.hf-nav *::after{box-sizing:border-box}
+.hf-nav ul{list-style:none;margin:0;padding:0}
+.hf-nav a{text-decoration:none;color:inherit;-webkit-tap-highlight-color:transparent}
+.hf-nav :focus-visible{outline:3px solid var(--orange-1);outline-offset:2px}
+.hf-nav{position:sticky;top:0;z-index:100;display:flex;flex-wrap:nowrap;align-items:center;gap:20px;min-height:var(--nav-h);padding:8px max(28px,env(safe-area-inset-left));background:var(--nav-bg);border-bottom:3px solid var(--nav-border);font-family:var(--font-nav)}
+.hf-nav__brand{display:flex;align-items:center;gap:12px;flex-shrink:0;min-width:0;padding-right:20px;border-right:1px solid var(--nav-divider)}
+.hf-nav__logo{display:block;flex:0 0 auto;height:56px;width:auto;max-width:130px;object-fit:contain;border-radius:10px;transition:transform .25s}
+.hf-nav__brand:hover .hf-nav__logo{transform:rotate(-6deg) scale(1.06)}
+.hf-nav__name{display:flex;flex-direction:column;line-height:1.3;white-space:nowrap;color:var(--brand-text);font-size:var(--brand-size);font-weight:700;letter-spacing:var(--brand-spacing)}
+.hf-nav__name span:first-child{color:var(--green-1)}.hf-nav__name span:last-child{color:var(--orange-2)}
+.hf-nav__panel{display:flex;flex:1;min-width:0;align-items:center;justify-content:space-between;gap:20px}
+.hf-nav__links{display:flex;flex-wrap:nowrap;gap:6px}
+.hf-nav__links a{display:block;padding:9px 16px;border-radius:12px;font-size:var(--nav-link-size);font-weight:var(--nav-link-weight);white-space:nowrap;color:var(--nav-link);transition:color .2s,background .2s,transform .15s}
+.hf-nav__links a:hover{color:var(--nav-link-hover);background:var(--nav-link-hover-bg)}
+.hf-nav__links a:active{transform:scale(.95)}
+.hf-nav__links a.active,.hf-nav__links a.is-selected{background:var(--nav-active-bg);color:var(--nav-active-text);font-weight:800;box-shadow:0 4px 12px rgba(238,108,26,.35)}
+.hf-nav__tools{display:flex;align-items:center;flex-shrink:0;gap:14px}
+.hf-search{display:flex;align-items:center;padding-left:18px;background:var(--search-bg);border:2px solid var(--search-border);border-radius:999px;transition:border-color .2s,box-shadow .2s}
+.hf-search:focus-within{border-color:var(--orange-2);box-shadow:0 0 0 4px rgba(238,108,26,.25)}
+.hf-search input{width:150px;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-size:14px;color:var(--search-text)}
+.hf-search button{display:grid;place-items:center;width:36px;height:36px;flex-shrink:0;margin:1px;border:0;border-radius:50%;cursor:pointer;background:var(--search-btn-bg);color:var(--search-btn-icon);transition:transform .2s}
+.hf-search button:hover{transform:scale(1.1)}
+.hf-icons{display:flex;align-items:center;gap:8px}
+.hf-icon{position:relative;display:grid;place-items:center;min-width:44px;min-height:44px;color:var(--nav-icons);transition:color .2s,transform .2s}
+.hf-icon:hover{color:var(--nav-link-hover);transform:scale(1.1)}
+.hf-icon:active{transform:scale(.9)}
+.hf-badge{position:absolute;top:2px;right:0;display:grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--badge-bg);color:var(--badge-text);font-size:11px;font-weight:800;line-height:1}
+.hf-nav__toggle,.hf-nav__close,.hf-nav__backdrop{display:none}
+@media(min-width:1201px) and (max-width:1400px){.hf-nav{gap:14px;padding-inline:20px}.hf-nav__panel{gap:14px}.hf-nav__links{gap:2px}.hf-nav__links a{padding:8px 12px;font-size:13px}.hf-search input{width:110px}}
+@media(min-width:769px) and (max-width:1200px){
+  :root{--nav-h:136px}
+  .hf-nav{flex-wrap:wrap;row-gap:6px;padding:10px 20px 8px}
+  .hf-nav__panel{display:contents}
+  .hf-nav__brand{order:1;padding-right:0;border-right:0}
+  .hf-nav__tools{order:2;margin-left:auto}
+  .hf-nav__links{order:3;flex:0 0 100%;flex-wrap:wrap;justify-content:center;padding-top:6px;border-top:1px solid var(--nav-divider)}
+}
+@media(max-width:768px){
+  :root{--nav-h:72px}
+  .hf-nav{padding:6px max(14px,env(safe-area-inset-left));gap:10px}
+  .hf-nav__logo{height:44px;max-width:100px}
+  .hf-nav__brand{padding-right:0;border-right:0}
+  .hf-nav__name{font-size:12px;letter-spacing:2px}
+  .hf-nav__toggle{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;width:48px;height:48px;margin-left:auto;padding:0;background:none;border:0;cursor:pointer}
+  .hf-nav__toggle span{display:block;width:26px;height:3px;border-radius:2px;background:var(--hamburger-color);transition:background .2s}
+  .hf-nav__toggle:hover span{background:var(--orange-2)}
+  .hf-nav__panel{position:fixed;top:0;right:0;bottom:0;z-index:2;width:min(320px,86vw);display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:22px;padding:16px 22px max(28px,env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior:contain;background:var(--nav-bg);border-left:3px solid var(--nav-border);box-shadow:-12px 0 30px rgba(0,0,0,.5);transform:translateX(105%);visibility:hidden;transition:transform .3s,visibility .3s}
+  .hf-nav.is-open .hf-nav__panel,.hf-nav__panel.open{transform:none;visibility:visible}
+  .hf-nav__close{display:grid;place-items:center;align-self:flex-end;flex-shrink:0;width:44px;height:44px;padding:0;border:2px solid var(--orange-2);border-radius:12px;background:none;color:var(--nav-link);cursor:pointer;transition:background .2s}
+  .hf-nav__close:hover{background:var(--orange-2)}
+  .hf-nav__close svg{width:22px;height:22px}
+  .hf-nav__backdrop{display:block;position:fixed;inset:0;z-index:1;background:rgba(0,0,0,.6);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+  .hf-nav.is-open .hf-nav__backdrop,.hf-nav__backdrop.open{opacity:1;visibility:visible}
+  .hf-nav__links{flex-direction:column;gap:4px}
+  .hf-nav__links a{padding:14px 16px;font-size:16px}
+  .hf-nav__tools{flex-direction:column;align-items:stretch;flex-shrink:0;gap:12px}
+  .hf-search{width:100%}.hf-search input{width:100%;font-size:16px}
+}
+@media(max-width:360px){.hf-nav__name{font-size:11px;letter-spacing:1px}}
+
+/* =====================================================
+   18. ÍCONO DE USUARIO
+   ===================================================== */
+#nav-cuenta{display:grid;place-items:center;width:var(--user-size);height:var(--user-size);min-width:0;min-height:0;border-radius:50%;background:var(--user-bg);border:2px solid var(--user-border);color:var(--user-icon);box-shadow:0 0 0 3px var(--user-ring);transition:transform .25s,box-shadow .25s,background .25s}
+#nav-cuenta svg{width:60%;height:60%;stroke:var(--user-icon);fill:rgba(255,255,255,.25)}
+#nav-cuenta:hover{transform:scale(1.1);background:var(--user-hover-bg);box-shadow:0 0 0 5px var(--user-hover-ring);color:var(--user-icon)}
+#nav-cuenta:active{transform:scale(.93)}
+#nav-cuenta:focus-visible{outline:3px solid #c8e86b}
+
+/* =====================================================
+   17b. BOTÓN DE ROBI · imagen SIN fondo que lleva a paginas/robi.html
+   - PC y tablet: último elemento de la fila de enlaces (después de Contacto)
+   - Celular: aparece en la barra superior, junto a la hamburguesa
+   ===================================================== */
+.hf-nav__links li.hf-nav__robi-li{display:flex;align-items:center;margin-left:8px}
+.hf-nav__links a.hf-nav__robi,.hf-nav__robi{position:relative;display:grid;place-items:center;padding:2px 6px;border:0;border-radius:0;background:none;box-shadow:none;-webkit-tap-highlight-color:transparent}
+.hf-nav__links a.hf-nav__robi:hover,.hf-nav__links a.hf-nav__robi.active,.hf-nav__links a.hf-nav__robi.is-selected{background:none;box-shadow:none}
+.hf-nav__robi img{display:block;height:var(--robi-h);width:auto;max-width:none;object-fit:contain;background:none;border:0;border-radius:0;padding:0;
+  filter:drop-shadow(0 3px 5px rgba(0,0,0,.55));animation:robiFlota 4s ease-in-out infinite;
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),filter .3s}
+.hf-nav__robi:hover img,.hf-nav__robi:focus-visible img{animation:none;transform:translateY(-3px) scale(1.12) rotate(-4deg);filter:drop-shadow(0 6px 10px var(--robi-glow))}
+.hf-nav__robi:active img{transform:scale(.92)}
+.hf-nav__robi.active::after{content:'';position:absolute;left:50%;bottom:-3px;width:7px;height:7px;border-radius:50%;background:var(--orange-2);transform:translateX(-50%);box-shadow:0 0 8px var(--robi-glow)}
+.hf-nav__robi::before{content:attr(data-tip);position:absolute;top:calc(100% + 4px);left:50%;z-index:5;padding:4px 12px;border-radius:999px;background:var(--robi-tip-bg);color:var(--robi-tip-text);font-size:12px;font-weight:800;white-space:nowrap;opacity:0;pointer-events:none;transform:translate(-50%,-4px);transition:opacity .2s,transform .2s;box-shadow:0 6px 14px rgba(0,0,0,.35)}
+.hf-nav__robi:hover::before,.hf-nav__robi:focus-visible::before{opacity:1;transform:translate(-50%,0)}
+.hf-nav__robi--top{display:none}
+@keyframes robiFlota{50%{transform:translateY(-4px)}}
+
+/* Pantallas medianas de PC: imagen un poco menor para que todo quepa en una fila */
+@media(min-width:1201px) and (max-width:1400px){:root{--robi-h:46px}.hf-nav__links li.hf-nav__robi-li{margin-left:4px}}
+/* Tablet (dos filas): Robi va al final de la segunda fila */
+@media(min-width:769px) and (max-width:1200px){:root{--robi-h:46px}}
+/* Tablet angosta (769–900px): enlaces un poco más compactos para que quepan en UNA sola fila con Robi */
+@media(min-width:769px) and (max-width:900px){
+  .hf-nav__links{gap:0;flex-wrap:nowrap}
+  .hf-nav__links a{padding:8px 9px;font-size:12.5px}
+  .hf-nav__links li.hf-nav__robi-li{margin-left:2px}
+  :root{--robi-h:42px}
+}
+/* Celular: Robi sale del menú y se coloca junto a la hamburguesa */
+@media(max-width:768px){
+  :root{--robi-h:44px}
+  .hf-nav__links li.hf-nav__robi-li{display:none}
+  .hf-nav__robi--top{display:grid;margin-left:auto}
+  .hf-nav__robi--top + .hf-nav__toggle{margin-left:0}
+  .hf-nav__robi::before{display:none}
+}
+@media(max-width:360px){:root{--robi-h:38px}.hf-nav__robi--top{padding:2px 2px}}
+@media(prefers-reduced-motion:reduce){.hf-nav__robi img{animation:none;transition:none}}
+
+/* El carrito hereda este color (verde neón de tu diseño) para verse igual en todas las páginas, también en Robi */
+.hf-nav{color:var(--color-text,#9eff0d)}

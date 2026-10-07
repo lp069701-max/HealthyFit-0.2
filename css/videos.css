@@ -1,0 +1,94 @@
+/* =====================================================================
+   HEALTHYFIT · videos.css — VIDEOS INDEPENDIENTES + FONDO CON IMAGEN
+   Se carga después de estilo.css.
+   ===================================================================== */
+
+/* =====================================================
+   VARIABLES  (edita solo las del video o panel que quieras cambiar)
+   ===================================================== */
+:root{
+  /* ---- V1 · INICIO: cuadrado con marco naranja ---- */
+  --vi-max:540px;
+  --vi-ratio:1/1;                 /* 1/1 cuadrado · 4/5 vertical · 16/10 horizontal */
+  --vi-radius:30px;
+  --vi-border-w:2px;
+  --vi-border:linear-gradient(135deg,#ffb347,#ee6c1a);
+  --vi-border-hover:linear-gradient(135deg,#8cc63f,#2f8f2a);
+  --vi-bg:#000; --vi-fit:cover;
+  --vi-shadow:0 18px 40px rgba(0,0,0,.45); --vi-shadow-hover:0 22px 50px rgba(238,108,26,.45);
+
+  /* ---- V2 · PRODUCTOS: sin marco, borde izquierdo desvanecido ---- */
+  --vp-max:380px;
+  --vp-ratio:14/14;
+  --vp-radius:400px;
+  --vp-fade:34%;
+  --vp-bg:transparent; --vp-fit:cover;
+
+  /* ---- V3 · NOSOTROS: vertical con marco verde ---- */
+  --vn-max:420px;
+  --vn-ratio:2/3;
+  --vn-radius:44px;
+  --vn-border-w:4px;
+  --vn-border:linear-gradient(160deg,#8cc63f,#2f8f2a 55%,#14501a);
+  --vn-border-hover:linear-gradient(160deg,#ffb347,#ee6c1a);
+  --vn-bg:#000; --vn-fit:cover;
+  --vn-shadow:0 0 0 6px rgba(140,198,63,.18),0 18px 40px rgba(0,0,0,.4);
+  --vn-shadow-hover:0 0 0 8px rgba(238,108,26,.25),0 22px 50px rgba(0,0,0,.5);
+
+  /* ---- EXTRA · IMAGEN DE FONDO DEL PANEL DE INICIO ---- */
+  --hero-img:url("../img/fondo-inicio.jpg");   /* ← nombre de tu imagen (carpeta img). Si no existe, se ve el degradado verde */
+  --hero-img-pos:center;
+  --hero-img-size:cover;
+  --hero-img-attach:scroll;                    /* fixed = efecto parallax (solo PC) */
+  --hero-overlay:linear-gradient(100deg,rgba(0,24,2,.80) 0%,rgba(2,60,0,.55) 55%,rgba(0,0,0,.25) 100%);
+}
+
+/* V1 · VIDEO DE INICIO (#video) */
+#video .video-panel,.video-panel.video--inicio{
+  width:100%;max-width:var(--vi-max);aspect-ratio:var(--vi-ratio);justify-self:end;
+  border:var(--vi-border-w) solid transparent;border-radius:var(--vi-radius);overflow:hidden;
+  background:linear-gradient(var(--vi-bg),var(--vi-bg)) padding-box,var(--vi-border) border-box;
+  box-shadow:var(--vi-shadow);-webkit-mask-image:none;mask-image:none;transition:transform .35s,box-shadow .35s}
+#video .video-panel video,.video--inicio video{display:block;width:100%;height:100%;object-fit:var(--vi-fit);border-radius:calc(var(--vi-radius) - var(--vi-border-w))}
+#video .video-panel:hover,.video-panel.video--inicio:hover{transform:translateY(-6px);box-shadow:var(--vi-shadow-hover);background:linear-gradient(var(--vi-bg),var(--vi-bg)) padding-box,var(--vi-border-hover) border-box}
+
+/* V2 · VIDEO DE PRODUCTOS (#productos-inicio) */
+#productos-inicio .video-panel,.video-panel.video--productos{
+  width:100%;max-width:var(--vp-max);aspect-ratio:var(--vp-ratio);justify-self:end;
+  border:0;border-radius:var(--vp-radius);overflow:hidden;background:var(--vp-bg);box-shadow:none;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 var(--vp-fade));
+          mask-image:linear-gradient(to right,transparent 0,#000 var(--vp-fade))}
+#productos-inicio .video-panel video,.video--productos video{display:block;width:100%;height:100%;object-fit:var(--vp-fit)}
+
+/* V3 · VIDEO DE NOSOTROS (#nosotros-inicio) */
+#nosotros-inicio .video-panel,.video-panel.video--nosotros{
+  width:100%;max-width:var(--vn-max);aspect-ratio:var(--vn-ratio);justify-self:end;
+  border:var(--vn-border-w) solid transparent;border-radius:var(--vn-radius);overflow:hidden;
+  background:linear-gradient(var(--vn-bg),var(--vn-bg)) padding-box,var(--vn-border) border-box;
+  box-shadow:var(--vn-shadow);-webkit-mask-image:none;mask-image:none;transition:transform .35s,box-shadow .35s}
+#nosotros-inicio .video-panel video,.video--nosotros video{display:block;width:100%;height:100%;object-fit:var(--vn-fit);border-radius:calc(var(--vn-radius) - var(--vn-border-w))}
+#nosotros-inicio .video-panel:hover,.video-panel.video--nosotros:hover{transform:scale(1.02);box-shadow:var(--vn-shadow-hover);background:linear-gradient(var(--vn-bg),var(--vn-bg)) padding-box,var(--vn-border-hover) border-box}
+
+/* EXTRA · IMAGEN DE FONDO DEL PRIMER PANEL (Inicio)
+   Capas: oscurecido → tu imagen → degradado verde (si la imagen no existe, se ve el degradado).
+   Para otra página: agrega la clase hero--imagen a su <section class="hero">. */
+#inicio.hero,.hero.hero--imagen{
+  background:var(--hero-overlay),var(--hero-img) var(--hero-img-pos)/var(--hero-img-size) no-repeat,var(--hero-bg);
+  background-attachment:scroll,var(--hero-img-attach),scroll;
+  background-color:#023c00}
+
+/* RESPONSIVO (tablet y celular) */
+@media(max-width:1024px){
+  #video .video-panel,#productos-inicio .video-panel,#nosotros-inicio .video-panel,
+  .video-panel.video--inicio,.video-panel.video--productos,.video-panel.video--nosotros{justify-self:center;margin-inline:auto}
+  #productos-inicio .video-panel,.video-panel.video--productos{
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 calc(var(--vp-fade) - 6%));
+            mask-image:linear-gradient(to bottom,transparent 0,#000 calc(var(--vp-fade) - 6%))}
+  #inicio.hero,.hero.hero--imagen{background-attachment:scroll,scroll,scroll}
+}
+@media(max-width:640px){
+  #video .video-panel,.video-panel.video--inicio{max-width:100%;--vi-radius:24px}
+  #productos-inicio .video-panel,.video-panel.video--productos{max-width:100%;--vp-radius:28px}
+  #nosotros-inicio .video-panel,.video-panel.video--nosotros{max-width:100%;--vn-radius:30px}
+}
+@media(prefers-reduced-motion:reduce){#video .video-panel,#nosotros-inicio .video-panel{transition:none}}
